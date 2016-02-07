@@ -99,7 +99,9 @@ class FacebookProvider extends AbstractProvider implements ProviderInterface
     protected function getUserFriends(array $config)
     {
         $id = $config['id'];
-        $response = $this->getHttpClient()->get($this->graphUrl.'/'.$this->version.'/'.$id.'/friends', [
+        $token = $config['token'];
+        $appSecretProof = hash_hmac('sha256', $token, $this->client_secret);
+        $response = $this->getHttpClient()->get($this->graphUrl.'/'.$this->version.'/me/taggable_friends?access_token='.$token.'&appsecret_proof='.$appSecretProof.'&limit=5000', [
             'headers' => [
                 'Accept' => 'application/json',
             ],

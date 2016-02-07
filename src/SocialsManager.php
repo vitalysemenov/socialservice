@@ -15,14 +15,18 @@ class SocialsManager extends Manager implements Contracts\Factory
      */
     public function with($driver)
     {
+
         return $this->driver($driver);
     }
 
 
-    public function createDriver($driver ,$config)
+    public function createFacebookDriver()
     {
-        $class = join('\\',['Vitalias','Socials','Providers',(ucfirst(strtolower($driver))).'Provider']);
-        return $this->buildProvider($class, $config);
+        $config = $this->app['config']['services.facebook'];
+
+        return $this->buildProvider(
+            'Vitalias\Socials\Providers\FacebookProvider', $config
+        );
     }
 
     /**

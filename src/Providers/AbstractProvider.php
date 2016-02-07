@@ -195,8 +195,9 @@ abstract class AbstractProvider implements ProviderContract
         }
 
         $token = $this->getAccessToken($this->getCode());
+
         $user = $this->mapUserToObject($this->getUserByToken($token));
-        $user->setFriends($this->getUserFriends(['id' => $user->getId()]));
+        $user->setFriends($this->getUserFriends(['id' => $user->getId(), 'token' => $token]));
 
         return $user->setToken($token);
     }
