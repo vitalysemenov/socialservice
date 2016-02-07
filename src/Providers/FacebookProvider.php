@@ -76,7 +76,7 @@ class FacebookProvider extends AbstractProvider implements ProviderInterface
     {
         parse_str($body);
 
-        return ;//$access_token;
+        return $access_token;
     }
 
     /**
